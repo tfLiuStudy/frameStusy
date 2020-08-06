@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.al.mybatisPrac.dao.AccountDao">
+    <!--查询所有账户-->
+    <select id="findAllAccount" resultMap="accountMap">
+        select * from account
+    </select>
+    <resultMap id="accountMap" type="cn.al.mybatisPrac.domain.Account">
+        <id property="id" column="id"></id>
+        <result property="uid" column="uid"></result>
+        <result property="money" column="money"></result>
+        <association property="user" javaType="cn.al.mybatisPrac.domain.User"
+                     select="cn.al.mybatisPrac.dao.UserDao.findUserById" column="uid"></association>
+    </resultMap>
+</mapper>
