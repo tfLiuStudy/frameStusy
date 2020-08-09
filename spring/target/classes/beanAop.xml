@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置 spring 创建容器时要扫描的包 -->
+    <context:component-scan base-package="cn.al.springAopPrac.*"></context:component-scan>
+    <aop:aspectj-autoproxy/>
+    <!--accountService-->
+<!--    <bean id="accountService" class="cn.al.springAopPrac.service.impl.AccountServiceImpl"></bean>-->
+<!--    &lt;!&ndash;logger&ndash;&gt;-->
+<!--    <bean id="logger" class="cn.al.springAopPrac.utils.Logger"></bean>-->
+<!--    &lt;!&ndash; 配置 aop &ndash;&gt;-->
+<!--    <aop:config>-->
+<!--    &lt;!&ndash; 配置切面 &ndash;&gt;-->
+<!--        <aop:pointcut expression="execution(* cn.al.springAopPrac.service.impl.*.*(..))" id="pt1"/>-->
+<!--        <aop:aspect id="logAdvice" ref="logger">-->
+<!--            &lt;!&ndash; 配置前置通知 &ndash;&gt;-->
+<!--            &lt;!&ndash;<aop:before method="printLog" pointcut="execution( * cn.al.springAopPrac.service.impl.*.*(..))"/>&ndash;&gt;-->
+<!--            &lt;!&ndash; 配置环绕通知 &ndash;&gt;-->
+<!--            <aop:around method="aroundPrintLog" pointcut-ref="pt1"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+</beans>
