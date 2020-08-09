@@ -11,6 +11,8 @@
     <modules>
         <module>mybatis</module>
         <module>spring</module>
+        <module>springMVC</module>
+        <module>ssm</module>
     </modules>
 
 

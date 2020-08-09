@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 配置 spring 创建容器时要扫描的包 -->
+    <context:component-scan base-package="cn.al.springTranStudy.*"></context:component-scan>
+    <!--accountService-->
+    <bean id="accountService" class="cn.al.springTranStudy.service.impl.accountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+    <!--accountDao-->
+    <bean id="accountDao" class="cn.al.springTranStudy.dao.impl.AccountDaoImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 配置一个事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入 DataSource -->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 事务的配置 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" read-only="false" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 配置 aop -->
+    <aop:config>
+    <!-- 配置切入点表达式 -->
+        <aop:pointcut expression="execution(* cn.al.springTranStudy.service.impl.*.*(..))" id="pt1"/>
+        <!-- 在 aop:config 标签内部：建立事务的通知和切入点表达式的关系 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
+    </aop:config>
+    <!--dataSource-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/tfliuStudy?characterEncoding=utf8"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="12345678"></property>
+    </bean>
+</beans>

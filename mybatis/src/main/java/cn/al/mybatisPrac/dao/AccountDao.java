@@ -1,7 +1,6 @@
 package cn.al.mybatisPrac.dao;
 
 import cn.al.mybatisPrac.domain.Account;
-import cn.al.mybatisPrac.domain.User;
 
 import java.util.List;
 
